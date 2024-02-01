@@ -2,6 +2,8 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -21,15 +23,21 @@ public class Enemigo : MonoBehaviour
 
     public bool vivo = true;
 
-    private void Awake()
+    public void Awake()
     {
-        if (autoseleccionarTarget)
-        {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+        
             StartCoroutine(CalcularDistancia());
 
-        }
+        
     }
+    private void Start()
+    {
+    if (autoseleccionarTarget)
+    {
+        target = Personaje.singlenton.transform;
+    }
+    }
+
 
     private void LateUpdate()
     {
@@ -44,6 +52,7 @@ public class Enemigo : MonoBehaviour
                 EstadoIdle();
                 break;
             case Estados.seguir:
+                transform.LookAt(target, Vector3.up);
                 EstadoSeguir();
                 break;
             case Estados.atacar:
@@ -110,10 +119,10 @@ public class Enemigo : MonoBehaviour
     {
         while (vivo)
         {
-            if(target != null)
+            yield return new WaitForSeconds(0.2f);
+            if (target != null)
             {
-                distancia=Vector3.Distance(transform.position, target.position);
-                yield return new WaitForSeconds(0.3f);
+                distancia=Vector3.Distance(transform.position, target.position);             
             }
         }
     }
