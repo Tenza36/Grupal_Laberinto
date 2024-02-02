@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Patrullaje : MonoBehaviour
 {
@@ -15,13 +16,17 @@ public class Patrullaje : MonoBehaviour
     public Transform mitad;
     public Transform final;
     private bool vieneDeInicio = true;
+    public Image BarraHP2;
+    public Canvas CanvasHP;
+    public float vidaActual;
+    public float vidaMaxima;
 
     // Start is called before the first frame update
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
         agente.stoppingDistance = 0;
-
+        CanvasHP.enabled = false;
     }
 
     // Update is called once per frame
@@ -33,6 +38,9 @@ public class Patrullaje : MonoBehaviour
             perseguirPersonaje();
         }
         patrullaje();
+
+        BarraHP2.fillAmount = vidaActual / vidaMaxima;
+
     }
     private void perseguirPersonaje()
     {
@@ -47,6 +55,7 @@ public class Patrullaje : MonoBehaviour
         if (Physics.Raycast(ray, out hit, longitudrayo, ElementoQueVeo) && persecucion == false) // Variable name corrected
         {
             persecucion = true;
+            CanvasHP.enabled = true;
 
         }
     }

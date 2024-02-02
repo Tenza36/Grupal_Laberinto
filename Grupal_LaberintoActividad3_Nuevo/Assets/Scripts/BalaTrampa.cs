@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class BalasTrampa : MonoBehaviour
 {
+    public BarraHP hp;
+
+    void Start()
+    {
+        // Busca la instancia de BarraHP al inicio
+        hp = FindObjectOfType<BarraHP>();
+
+        if (hp == null)
+        {
+            Debug.LogError("No se encontró la instancia de BarraHP. Asegúrate de que BarraHP esté presente en la escena.");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -9,7 +21,7 @@ public class BalasTrampa : MonoBehaviour
         {
             Debug.Log("¡El jugador tocó la trampa!");
             // Colisionó con el jugador, reiniciar la escena o realizar alguna acción
-            ReiniciarEscena2();
+            hp.vidaActual = hp.vidaActual - 20;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -18,15 +30,7 @@ public class BalasTrampa : MonoBehaviour
         {
             Debug.Log("¡El jugador tocó la trampa!");
             // Colisionó con el jugador, reiniciar la escena o realizar alguna acción
-            ReiniciarEscena2();
+            hp.vidaActual = hp.vidaActual - 40;
         }
     }
-
-    private void ReiniciarEscena2()
-    {
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-    }
-
-
 }

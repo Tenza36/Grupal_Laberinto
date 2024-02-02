@@ -123,9 +123,15 @@ public class CasteoRayoLacer : MonoBehaviour
     public float gunRange = 50f;
     public float fireRate = 0.2f;
     public float laserDuration = 0.05f;
+    public Patrullaje Enemigo;
 
     LineRenderer laserLine;
     float fireTimer;
+
+    private void Start()
+    {
+        Enemigo = FindAnyObjectByType<Patrullaje>();
+    }
 
     void Awake()
     {
@@ -144,6 +150,19 @@ public class CasteoRayoLacer : MonoBehaviour
 
             laserLine.SetPosition(0, rayOrigin);
             RaycastHit hit;
+
+            if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, gunRange))
+            {
+                if (hit.collider.CompareTag("Enemigo"))
+                {
+                    if (Enemigo != null)
+                    {
+                        Enemigo.vidaActual -= 10;
+                        Debug.Log("He dado al enemigo");
+                    }
+                }
+            }
+
             if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, gunRange))
             {
                 AbrirPuertas abrirPuertas = hit.transform.GetComponent<AbrirPuertas>();

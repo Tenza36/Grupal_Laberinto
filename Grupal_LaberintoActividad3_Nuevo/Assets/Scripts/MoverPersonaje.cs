@@ -14,7 +14,7 @@ public class MoverPersonaje : MonoBehaviour
     public float DistanciaDelPiso;
     public LayerMask MascaraDelPiso;
     private Animator anim;
-
+    public Patrullaje enemigo;
     Vector3 VelocidadAbajo;
     bool EstaEnElPiso;
     void Start()
@@ -52,6 +52,6 @@ public class MoverPersonaje : MonoBehaviour
         Controlador.Move(VelocidadAbajo * Time.deltaTime);
 
         anim.SetFloat("Velx", x);
-        anim.SetFloat("Vely", z); 
+        anim.SetFloat("Vely", z);
     }
 }
