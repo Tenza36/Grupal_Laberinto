@@ -22,12 +22,16 @@ public class Patrullaje : MonoBehaviour
     public float vidaMaxima;
     public CasteoRayoLacer detectar;
     public BarraHP VidaPlayer;
+    private Animator anim;
+    public float x, y;
+    private bool estaMuerto = false;
     // Start is called before the first frame update
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
         agente.stoppingDistance = 0;
         CanvasHP.enabled = false;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -46,9 +50,17 @@ public class Patrullaje : MonoBehaviour
         {
             vidaActual = vidaActual - 10;
             detectar.Detectado = false;
+
+            if (vidaActual <= 0)
+            {
+                estaMuerto = true;
+                // Dejar de perseguir al jugador cuando muere
+                persecucion = false;
+            }
         }
 
         Morir();
+
     }
     private void perseguirPersonaje()
     {
@@ -77,7 +89,7 @@ public class Patrullaje : MonoBehaviour
             agente.destination = mitad.position;
             vieneDeInicio = true;
             Debug.Log("AAA");
-            
+
 
         }
         if (persecucion == false && Vector3.Distance(enemigo.position, final.position) < tolerancia)
@@ -99,6 +111,8 @@ public class Patrullaje : MonoBehaviour
 
 
         }
+        anim.SetFloat("velX", x);
+        anim.SetFloat("velY", y);
     }
 
     private void Ataque()
@@ -108,10 +122,13 @@ public class Patrullaje : MonoBehaviour
 
     private void Morir()
     {
-        if (vidaActual <= 0)
+        if (estaMuerto)
         {
-            Destroy(this.gameObject, 0.5f);
+            // Realizar acciones de muerte (rotación, animación, destrucción, etc.)
+            transform.LookAt(transform.position + Vector3.right);
+            anim.Play("Mutant Dying");
+            Destroy(this.gameObject, 2.5f);
         }
-    }
 
+    }
 }
