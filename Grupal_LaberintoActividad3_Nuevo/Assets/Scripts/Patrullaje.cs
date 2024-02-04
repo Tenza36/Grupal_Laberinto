@@ -20,7 +20,8 @@ public class Patrullaje : MonoBehaviour
     public Canvas CanvasHP;
     public float vidaActual;
     public float vidaMaxima;
-
+    public CasteoRayoLacer detectar;
+    public BarraHP VidaPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +42,13 @@ public class Patrullaje : MonoBehaviour
 
         BarraHP2.fillAmount = vidaActual / vidaMaxima;
 
+        if (detectar.Detectado == true)
+        {
+            vidaActual = vidaActual - 10;
+            detectar.Detectado = false;
+        }
+
+        Morir();
     }
     private void perseguirPersonaje()
     {
@@ -92,4 +100,18 @@ public class Patrullaje : MonoBehaviour
 
         }
     }
+
+    private void Ataque()
+    {
+        VidaPlayer.vidaActual = VidaPlayer.vidaActual - 10;
+    }
+
+    private void Morir()
+    {
+        if (vidaActual <= 0)
+        {
+            Destroy(this.gameObject, 0.5f);
+        }
+    }
+
 }

@@ -1430,15 +1430,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bb0338a1849d6a49bb6ea944b155b70, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.9
+      value: -65.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bb0338a1849d6a49bb6ea944b155b70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 60.437996
+      value: 60.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bb0338a1849d6a49bb6ea944b155b70, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -125.5
+      value: -11.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4bb0338a1849d6a49bb6ea944b155b70, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4037,6 +4037,8 @@ MonoBehaviour:
   CanvasHP: {fileID: 848171093}
   vidaActual: 50
   vidaMaxima: 50
+  detectar: {fileID: 723753081}
+  VidaPlayer: {fileID: 1251522502}
 --- !u!4 &597708132
 Transform:
   m_ObjectHideFlags: 0
@@ -4623,6 +4625,7 @@ MonoBehaviour:
   fireRate: 0.2
   laserDuration: 0.1
   Enemigo: {fileID: 0}
+  Detectado: 0
 --- !u!120 &723753082
 LineRenderer:
   serializedVersion: 2
@@ -5757,7 +5760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89f06566d94c874e86cb029889ef0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToFollow: {fileID: 597708132}
 --- !u!114 &848171091
 MonoBehaviour:
   m_ObjectHideFlags: 0
