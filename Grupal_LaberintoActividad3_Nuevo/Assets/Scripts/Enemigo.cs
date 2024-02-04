@@ -58,7 +58,8 @@ public class Enemigo : MonoBehaviour
             case Estados.atacar:
                 EstadoAtacar();
                 break;
-            case Estados.muerto:             
+            case Estados.muerto:
+                
                 EstadoMuerto();
                 break;
             default:
@@ -93,14 +94,15 @@ public class Enemigo : MonoBehaviour
     }
     public virtual void EstadoSeguir()
     {
-        if (distancia < distanciaAtacar)
-        {
-            CambiarEstado(Estados.atacar);
-        }
-        else if(distancia > distanciaEscapar)
-        {
-            CambiarEstado(Estados.idle);
-        }
+     
+         if (distancia < distanciaAtacar)
+         {
+             CambiarEstado(Estados.atacar);
+         }
+         else if(distancia > distanciaEscapar)
+         {
+           CambiarEstado(Estados.idle);
+         }
 
     }
     public virtual void EstadoAtacar()
@@ -113,8 +115,9 @@ public class Enemigo : MonoBehaviour
     }
     public virtual void EstadoMuerto()
     {
-
+        
     }
+
     IEnumerator CalcularDistancia()
     {
         while (vivo)
@@ -148,7 +151,7 @@ public class Enemigo : MonoBehaviour
         Gizmos.DrawIcon(transform.position + Vector3.up * 2.5f, "0"+icono+".png");
     }
 
-    // Update is called once per frame
+   
     public enum Estados
     {
         idle   = 0,
