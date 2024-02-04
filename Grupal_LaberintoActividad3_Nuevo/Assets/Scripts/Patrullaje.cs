@@ -42,6 +42,7 @@ public class Patrullaje : MonoBehaviour
         {
             perseguirPersonaje();
         }
+        Morir();
         patrullaje();
 
         BarraHP2.fillAmount = vidaActual / vidaMaxima;
@@ -59,7 +60,7 @@ public class Patrullaje : MonoBehaviour
             }
         }
 
-        Morir();
+        
 
     }
     private void perseguirPersonaje()
@@ -128,6 +129,7 @@ public class Patrullaje : MonoBehaviour
             transform.LookAt(transform.position + Vector3.right);
             anim.Play("Mutant Dying");
             Destroy(this.gameObject, 2.5f);
+            agente.destination = agente.transform.position;
         }
 
     }
