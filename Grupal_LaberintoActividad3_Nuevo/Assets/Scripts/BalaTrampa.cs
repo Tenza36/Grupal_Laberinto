@@ -30,7 +30,7 @@ public class BalasTrampa : MonoBehaviour
         {
             Debug.Log("¡El jugador tocó la trampa!");
             // Colisionó con el jugador, reiniciar la escena o realizar alguna acción
-            hp.vidaActual = hp.vidaActual - 40;
+            hp.vidaActual = hp.vidaActual - 40; //Daño que hace la trampa al jugador
         }
     }
 }

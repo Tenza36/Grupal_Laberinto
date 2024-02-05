@@ -36,19 +36,20 @@ public class CasteoRayoLacer : MonoBehaviour
             laserLine.SetPosition(0, rayOrigin);
             RaycastHit hit;
 
-            if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, gunRange))
+            if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, gunRange)) // Lanza el rayo
             {
-                if (hit.collider.CompareTag("Enemigo"))
+                if (hit.collider.CompareTag("Enemigo")) // Comprueba si tiene el tag enemigo
                 {
                     Debug.Log("Enemigo Detectado");
-                    Detectado = true;
+                    Detectado = true; //El rayo detecta al objetivo y aplica el estado Detectado
                 }
             }
 
-            if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, gunRange))
+            if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, gunRange)) // Funcionamiento para que el raycast abra las puertas del laberinto
             {
-                AbrirPuertas abrirPuertas = hit.collider.GetComponent<AbrirPuertas>();
-                if (abrirPuertas != null)
+                // Crea un objeto de la clase "AbrirPuertas" en el que almacena la componente del objeto que colisiona con el rayo AbrirPuertas
+                AbrirPuertas abrirPuertas = hit.collider.GetComponent<AbrirPuertas>(); 
+                if (abrirPuertas != null) // Se ejecuta la funcion del objeto si no es nulo
                 {
                     abrirPuertas.OnTriggerEnter(hit.collider);
                 }

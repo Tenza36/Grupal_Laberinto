@@ -8,7 +8,7 @@ public class AbrirPuertas : MonoBehaviour
 {
     public Material open;
     [SerializeField]private Material closed;
-    private Renderer renderer;
+    private new Renderer renderer;
     public Animator PuertasGeneral;
     public void OnTriggerEnter(Collider other)
     {
